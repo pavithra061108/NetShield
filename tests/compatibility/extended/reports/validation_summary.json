@@ -1,0 +1,11 @@
+{
+    "expected_feature_values": 63,
+    "total_features_compared": 63,
+    "passed": 61,
+    "failed": 0,
+    "undefined": 2,
+    "comparable_features": 61,
+    "agreement_percentage": 100.0,
+    "failed_files": [],
+    "validation_status": "PASS"
+}

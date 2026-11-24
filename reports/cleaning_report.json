@@ -1,0 +1,14 @@
+{
+    "cleaning_date": "2026-11-24T05:33:11.604612+00:00",
+    "original_records": 225711,
+    "missing_infinite_removed": 0,
+    "invalid_labels_removed": 0,
+    "negative_records_removed": 2,
+    "conflicting_feature_groups": 23,
+    "conflicting_rows_removed": 423,
+    "duplicates_removed": 15980,
+    "cleaned_records": 209306,
+    "benign_records": 82143,
+    "attack_records": 127163,
+    "remaining_duplicate_features": 0
+}

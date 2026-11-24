@@ -1,0 +1,20 @@
+{
+    "accuracy": 0.9994019006268967,
+    "precision": 0.9995703125,
+    "recall": 0.9993751220464753,
+    "f1_score": 0.9994727077433845,
+    "confusion_matrix": [
+        [
+            19527,
+            11
+        ],
+        [
+            16,
+            25589
+        ]
+    ],
+    "training_date": "2026-11-23T10:20:43.443411+00:00",
+    "model": "Random Forest",
+    "dataset": "CIC-IDS2017 Friday Afternoon DDoS",
+    "evaluation_method": "Stratified random 80/20 split"
+}

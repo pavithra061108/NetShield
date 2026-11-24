@@ -1,0 +1,64 @@
+test_file,flow,feature,netshield_value,cic_value,status
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",Flow Duration,1000000.0,1000000.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",Total Fwd Packets,2.0,2.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",Total Backward Packets,0.0,0.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",Total Length of Fwd Packets,60.0,60.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",Total Length of Bwd Packets,0.0,0.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",Flow Bytes/s,60.0,60.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",Flow Packets/s,2.0,2.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",SYN Flag Count,0.0,0.0,PASS
+01_tcp_payload.pcap,"('192.0.2.10', 5000, '192.0.2.20', 80, 'TCP')",ACK Flag Count,2.0,2.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",Flow Duration,1000000.0,1000000.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",Total Fwd Packets,2.0,2.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",Total Backward Packets,0.0,0.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",Total Length of Fwd Packets,80.0,80.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",Total Length of Bwd Packets,0.0,0.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",Flow Bytes/s,80.0,80.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",Flow Packets/s,2.0,2.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",SYN Flag Count,0.0,0.0,PASS
+02_udp_payload.pcap,"('192.0.2.10', 5001, '192.0.2.20', 9000, 'UDP')",ACK Flag Count,0.0,0.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",Flow Duration,1000000.0,1000000.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",Total Fwd Packets,2.0,2.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",Total Backward Packets,1.0,1.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",Total Length of Fwd Packets,60.0,60.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",Total Length of Bwd Packets,30.0,30.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",Flow Bytes/s,90.0,90.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",Flow Packets/s,3.0,3.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",SYN Flag Count,0.0,0.0,PASS
+03_bidirectional.pcap,"('192.0.2.10', 5002, '192.0.2.20', 80, 'TCP')",ACK Flag Count,3.0,3.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",Flow Duration,1000000.0,1000000.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",Total Fwd Packets,2.0,2.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",Total Backward Packets,0.0,0.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",Total Length of Fwd Packets,40.0,40.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",Total Length of Bwd Packets,0.0,0.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",Flow Bytes/s,40.0,40.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",Flow Packets/s,2.0,2.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",SYN Flag Count,0.0,0.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5003, '192.0.2.20', 9000, 'UDP')",ACK Flag Count,0.0,0.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",Flow Duration,1000000.0,1000000.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",Total Fwd Packets,2.0,2.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",Total Backward Packets,0.0,0.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",Total Length of Fwd Packets,60.0,60.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",Total Length of Bwd Packets,0.0,0.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",Flow Bytes/s,60.0,60.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",Flow Packets/s,2.0,2.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",SYN Flag Count,0.0,0.0,PASS
+04_multiple_flows.pcap,"('192.0.2.10', 5004, '192.0.2.20', 9000, 'UDP')",ACK Flag Count,0.0,0.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",Flow Duration,2000000.0,2000000.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",Total Fwd Packets,2.0,2.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",Total Backward Packets,0.0,0.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",Total Length of Fwd Packets,100.0,100.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",Total Length of Bwd Packets,0.0,0.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",Flow Bytes/s,50.0,50.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",Flow Packets/s,1.0,1.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",SYN Flag Count,0.0,0.0,PASS
+05_flow_duration.pcap,"('192.0.2.10', 5005, '192.0.2.20', 80, 'TCP')",ACK Flag Count,2.0,2.0,PASS
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",Flow Duration,0.0,0.0,PASS
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",Total Fwd Packets,2.0,2.0,PASS
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",Total Backward Packets,0.0,0.0,PASS
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",Total Length of Fwd Packets,30.0,30.0,PASS
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",Total Length of Bwd Packets,0.0,0.0,PASS
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",Flow Bytes/s,0.0,inf,UNDEFINED
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",Flow Packets/s,0.0,inf,UNDEFINED
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",SYN Flag Count,0.0,0.0,PASS
+06_zero_duration.pcap,"('192.0.2.10', 5006, '192.0.2.20', 9000, 'UDP')",ACK Flag Count,0.0,0.0,PASS

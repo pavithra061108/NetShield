@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Datasets
+datasets/
+*.pcap
+*.pcapng
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+# Generated database and local data
+data/
+
+# Additional Python files
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Large datasets
+*.zip
+*.pcap
+*.pcapng
+
+# Local installation utilities
+build_cicflowmeter.py
+check_java.py
+install.py
+run_cicflowmeter.py
+
+# Sensitive configuration
+.env
+.env.*
+*.pem
+*.key
