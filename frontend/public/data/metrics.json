@@ -1,0 +1,11 @@
+{
+    "algorithm": "Random Forest",
+    "dataset": "CIC-IDS2017",
+    "features": 9,
+    "accuracy": 99.95,
+    "precision": 99.97,
+    "recall": 99.94,
+    "f1_score": 99.96,
+    "evaluation_type": "Random held-out test split",
+    "independent_real_world_validation": false
+}

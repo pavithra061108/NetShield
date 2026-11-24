@@ -38,7 +38,7 @@ build/
 .DS_Store
 Thumbs.db
 # Generated database and local data
-data/
+/data/
 
 # Additional Python files
 .pytest_cache/
