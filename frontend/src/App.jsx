@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import localApi from "./localApi.js";
 
 import {
   Shield,
@@ -34,8 +34,7 @@ import {
 
 import "./App.css";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const API = "/api";
 const navigation = [
   ["Overview", LayoutDashboard],
   ["Traffic Analysis", Activity],
@@ -63,12 +62,12 @@ function App() {
   async function loadData() {
     try {
       const [health, s, f, a, m, v] = await Promise.all([
-        axios.get(`${API}/health`),
-        axios.get(`${API}/statistics`),
-        axios.get(`${API}/flows`),
-        axios.get(`${API}/alerts`),
-        axios.get(`${API}/model`),
-        axios.get(`${API}/validation`)
+        localApi.get(`${API}/health`),
+        localApi.get(`${API}/statistics`),
+        localApi.get(`${API}/flows`),
+        localApi.get(`${API}/alerts`),
+        localApi.get(`${API}/model`),
+        localApi.get(`${API}/validation`)
       ]);
 
       setOnline(health.data.status === "healthy");
@@ -77,9 +76,10 @@ function App() {
       setAlerts(a.data);
       setModel(m.data);
       setValidation(v.data);
-    } catch {
+    } catch (error) {
+      console.error(error);
       setOnline(false);
-      setMessage("Unable to load dashboard data.");
+      setMessage("Unable to load dashboard data: " + error.message);
     }
   }
 
@@ -92,15 +92,16 @@ function App() {
     setMessage("");
 
     try {
-      const response = await axios.post(`${API}/analyze`);
+      const response = await localApi.post(`${API}/analyze`);
 
       setMessage(
-        `Offline analysis completed. ${response.data.processed} records processed.`
+        `Demonstration completed. ${response.data.processed} saved predictions loaded.`
       );
 
       await loadData();
-    } catch {
-      setMessage("Analysis failed. Check the backend terminal.");
+    } catch (error) {
+      console.error(error);
+      setMessage("Demo failed: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -277,7 +278,7 @@ function App() {
 
         <div className="sidebar-footer">
           <span className={`dot ${online ? "green" : "red"}`} />
-          {online ? "Backend Connected" : "Backend Unavailable"}
+          {online ? "Demo Ready" : "Demo Unavailable"}
         </div>
       </aside>
 
@@ -300,13 +301,13 @@ function App() {
               disabled={loading}
             >
               <Activity size={18} />
-              {loading ? "Processing..." : "Run Analysis"}
+              {loading ? "Loading..." : "Run Demo"}
             </button>
           </div>
         </header>
 
         <div className="notice">
-          Offline demonstration using saved synthetic test data.
+          Browser demonstration using precomputed Random Forest predictions on synthetic test data. Repeated runs replay the same samples.
           Model flags are not confirmed security incidents.
         </div>
 
@@ -448,17 +449,17 @@ function App() {
 
             <div className="setting-row">
               <Server size={20} />
-              Backend: {online ? "Connected" : "Unavailable"}
+              Browser Demo: {online ? "Ready" : "Unavailable"}
             </div>
 
             <div className="setting-row">
               <Database size={20} />
-              Database: SQLite
+              Storage: Browser Local Storage
             </div>
 
             <div className="setting-row">
               <BrainCircuit size={20} />
-              Model: Random Forest
+              Model: Random Forest (saved predictions)
             </div>
 
             <div className="setting-row">
