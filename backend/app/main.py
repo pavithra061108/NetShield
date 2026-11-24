@@ -1,6 +1,10 @@
 import json
+import os
+import time
+import logging
 
 from pathlib import Path
+from threading import Lock
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
@@ -23,18 +27,47 @@ from backend.app.schemas import (
 )
 
 
+# ==========================================
+# PROJECT CONFIGURATION
+# ==========================================
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
+logging.basicConfig(level=logging.INFO)
+
+logger = logging.getLogger("NetShield")
+
+
+# ==========================================
+# ANALYSIS REQUEST PROTECTION
+# ==========================================
+
+analysis_lock = Lock()
+
+last_analysis_time = float("-inf")
+
+ANALYSIS_COOLDOWN = 10
+
+
+# ==========================================
+# APPLICATION LIFESPAN
+# ==========================================
 
 @asynccontextmanager
 async def lifespan(app):
 
     initialize_database()
 
-    print("NetShield Database Initialized!")
+    logger.info("NetShield Database Initialized!")
 
     yield
 
+    logger.info("NetShield Backend Stopped!")
+
+
+# ==========================================
+# FASTAPI APPLICATION
+# ==========================================
 
 app = FastAPI(
     title="NetShield",
@@ -44,17 +77,35 @@ app = FastAPI(
 )
 
 
+# ==========================================
+# CORS CONFIGURATION
+# ==========================================
+
+allowed_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+]
+
+frontend_url = os.getenv("FRONTEND_URL")
+
+if frontend_url:
+    allowed_origins.append(
+        frontend_url.strip().rstrip("/")
+    )
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173"
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"]
 )
 
+
+# ==========================================
+# HOME ENDPOINT
+# ==========================================
 
 @app.get("/")
 def home():
@@ -66,6 +117,10 @@ def home():
         "mode": "Offline demonstration"
     }
 
+
+# ==========================================
+# HEALTH ENDPOINT
+# ==========================================
 
 @app.get(
     "/api/health",
@@ -81,6 +136,10 @@ def health():
     }
 
 
+# ==========================================
+# STATISTICS ENDPOINT
+# ==========================================
+
 @app.get(
     "/api/statistics",
     response_model=StatisticsResponse
@@ -90,11 +149,19 @@ def statistics():
     return get_statistics()
 
 
+# ==========================================
+# NETWORK FLOWS ENDPOINT
+# ==========================================
+
 @app.get("/api/flows")
 def flows():
 
     return get_results()
 
+
+# ==========================================
+# SECURITY ALERTS ENDPOINT
+# ==========================================
 
 @app.get("/api/alerts")
 def alerts():
@@ -105,20 +172,65 @@ def alerts():
     ]
 
 
+# ==========================================
+# OFFLINE ANALYSIS ENDPOINT
+# ==========================================
+
 @app.post("/api/analyze")
 def analyze():
 
+    global last_analysis_time
+
+    if not analysis_lock.acquire(blocking=False):
+
+        raise HTTPException(
+            status_code=429,
+            detail="Analysis is already running."
+        )
+
     try:
 
-        return run_offline_analysis()
+        current_time = time.monotonic()
 
-    except Exception as error:
+        if (
+            current_time - last_analysis_time
+            < ANALYSIS_COOLDOWN
+        ):
+
+            raise HTTPException(
+                status_code=429,
+                detail="Please wait 10 seconds before running another analysis."
+            )
+
+        last_analysis_time = current_time
+
+        result = run_offline_analysis()
+
+        logger.info("Offline analysis completed.")
+
+        return result
+
+    except HTTPException:
+
+        raise
+
+    except Exception:
+
+        logger.exception("Offline analysis failed.")
 
         raise HTTPException(
             status_code=500,
-            detail=str(error)
+            detail="Offline analysis failed. Check backend logs."
         )
 
+    finally:
+
+        analysis_lock.release()
+
+
+# ==========================================
+# FEATURE VALIDATION ENDPOINT
+# ==========================================
 
 @app.get("/api/validation")
 def validation():
@@ -139,14 +251,29 @@ def validation():
             detail="Validation report not found."
         )
 
-    with open(
-        report_path,
-        "r",
-        encoding="utf-8"
-    ) as file:
+    try:
 
-        return json.load(file)
+        with open(
+            report_path,
+            "r",
+            encoding="utf-8"
+        ) as file:
 
+            return json.load(file)
+
+    except (OSError, json.JSONDecodeError):
+
+        logger.exception("Unable to read validation report.")
+
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to load validation report."
+        )
+
+
+# ==========================================
+# MACHINE LEARNING MODEL ENDPOINT
+# ==========================================
 
 @app.get("/api/model")
 def model_information():
@@ -164,12 +291,24 @@ def model_information():
     }
 
 
+# ==========================================
+# APPLICATION STARTUP
+# ==========================================
+
 if __name__ == "__main__":
 
     import uvicorn
 
+    port = int(os.getenv("PORT", "8000"))
+
+    host = (
+        "0.0.0.0"
+        if os.getenv("RENDER") == "true"
+        else "127.0.0.1"
+    )
+
     uvicorn.run(
         app,
-        host="127.0.0.1",
-        port=8000
+        host=host,
+        port=port
     )
